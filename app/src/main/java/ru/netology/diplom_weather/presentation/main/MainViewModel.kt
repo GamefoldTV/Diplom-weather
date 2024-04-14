@@ -1,7 +1,5 @@
 package ru.netology.diplom_weather.presentation.main
 
-import android.util.Log
-import androidx.compose.material3.BottomAppBarState
 import androidx.compose.runtime.Stable
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow

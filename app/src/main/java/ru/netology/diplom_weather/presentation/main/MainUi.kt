@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -34,10 +32,8 @@ fun MainScreen(
         )
     })
 
-    val uiState by viewModel.uiState.collectAsState()
-
     MainUi(
-        uiState = uiState,
+        viewModel = viewModel,
         navController = navController,
     )
 }
@@ -45,7 +41,7 @@ fun MainScreen(
 @Composable
 private fun MainUi(
     navController: NavHostController,
-    uiState: MainUiState
+    viewModel: MainViewModel
 ) {
 
     Scaffold(
@@ -80,7 +76,7 @@ private fun MainUi(
                 route = Graph.MAIN,
                 startDestination = TopLevelDestination.HOME.route,
             ) {
-                homeScreen(uiState)
+                homeScreen(viewModel)
             }
         }
     }
