@@ -4,6 +4,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.netology.diplom_weather.BuildConfig
+import ru.netology.diplom_weather.data.dto.SearchCityDto
 import ru.netology.diplom_weather.data.dto.WeatherDto
 
 interface WeatherApi {
@@ -17,5 +18,11 @@ interface WeatherApi {
         @Query("alerts") alerts: String = "no",
         @Query("lang") language: String,
     ): Response<WeatherDto>
+
+    @GET("search.json")
+    suspend fun getSearchCities(
+        @Query("key") key: String = BuildConfig.API_KEY,
+        @Query("q") city: String,
+    ): Response<List<SearchCityDto>>
 
 }

@@ -55,6 +55,9 @@ android {
 
 dependencies {
 
+    implementation(libs.exoPlayer)
+    implementation(libs.exoPlayerUi)
+
     implementation(libs.retrofit)
     implementation(libs.okHttp3Log)
     implementation(libs.ktxSerialJson)

@@ -11,10 +11,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import ru.netology.diplom_weather.App
+import ru.netology.diplom_weather.core.viewModelFactory
 import ru.netology.diplom_weather.presentation.home.homeScreen
 import ru.netology.diplom_weather.presentation.home.navigateToHome
 import ru.netology.diplom_weather.presentation.main.MainScreen
@@ -27,6 +30,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
 
         setContent {
 

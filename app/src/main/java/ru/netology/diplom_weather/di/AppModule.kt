@@ -35,16 +35,18 @@ fun AppModule(appContext: Context): AppModule {
         override val firebaseAuth: FirebaseAuth
             get() = FirebaseAuth.getInstance()
 
+        override val userStorage: UserStorage
+            get() = UserStorage(appContext.dataStore)
+
         override val weatherApi: WeatherApi by lazy {
             provideWeatherApi()
         }
 
         override val repository: Repository by lazy {
-            RepositoryImpl(weatherApi)
+            RepositoryImpl(weatherApi, userStorage)
         }
 
-        override val userStorage: UserStorage
-            get() = UserStorage(appContext.dataStore)
+
 
     }
 }

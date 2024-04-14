@@ -6,13 +6,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import ru.netology.diplom_weather.App
+import ru.netology.diplom_weather.core.viewModelFactory
 import ru.netology.diplom_weather.presentation.home.homeScreen
 import ru.netology.diplom_weather.presentation.home.navigateToHome
 import ru.netology.diplom_weather.presentation.navigation.BottomNavBar
@@ -23,12 +27,26 @@ import ru.netology.diplom_weather.presentation.navigation.TopLevelDestination
 fun MainScreen(
     navController: NavHostController = rememberNavController(),
 ) {
+    val viewModel = viewModel<MainViewModel>(factory = viewModelFactory {
+        MainViewModel(
+            repository = App.appModule.repository,
+            userStorage = App.appModule.userStorage
+        )
+    })
 
-    MainUi(navController = navController)
+    val uiState by viewModel.uiState.collectAsState()
+
+    MainUi(
+        uiState = uiState,
+        navController = navController,
+    )
 }
 
 @Composable
-private fun MainUi(navController: NavHostController) {
+private fun MainUi(
+    navController: NavHostController,
+    uiState: MainUiState
+) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -62,7 +80,7 @@ private fun MainUi(navController: NavHostController) {
                 route = Graph.MAIN,
                 startDestination = TopLevelDestination.HOME.route,
             ) {
-                homeScreen()
+                homeScreen(uiState)
             }
         }
     }

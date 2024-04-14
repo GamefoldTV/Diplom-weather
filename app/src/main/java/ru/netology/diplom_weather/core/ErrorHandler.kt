@@ -1,7 +1,7 @@
 package ru.netology.diplom_weather.core
 
 /**
- * Default global error handler for actions executed usually via viewModelScope.
+* Глобальный обработчик ошибок по умолчанию для действий, обычно выполняемых через viewModelScope.
  */
 interface ErrorHandler {
 
