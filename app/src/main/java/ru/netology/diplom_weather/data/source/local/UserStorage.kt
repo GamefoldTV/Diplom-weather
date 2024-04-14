@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.StateFlow
+import ru.netology.diplom_weather.core.Storage
 
 class UserStorage(
     dataStore: DataStore<Preferences>,
@@ -14,10 +15,10 @@ class UserStorage(
         val LANGUAGE = stringPreferencesKey("language")
     }
 
-    val userCity: StateFlow<String?> = createStateFlow(PreferencesKeys.CITY)
+    val city: StateFlow<String> = createStateFlow(PreferencesKeys.CITY, "Moscow")
     suspend fun saveCity(city: String) = savePreference(PreferencesKeys.CITY, city)
 
-    val userLanguage: StateFlow<String?> = createStateFlow(PreferencesKeys.LANGUAGE)
+    val language: StateFlow<String> = createStateFlow(PreferencesKeys.LANGUAGE, "ru")
     suspend fun saveLanguage(language: String) = savePreference(PreferencesKeys.LANGUAGE, language)
 }
 

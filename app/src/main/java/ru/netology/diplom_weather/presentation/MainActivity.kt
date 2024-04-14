@@ -1,4 +1,4 @@
-package ru.netology.diplom_weather
+package ru.netology.diplom_weather.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -21,7 +21,7 @@ import ru.netology.diplom_weather.presentation.main.MainScreen
 import ru.netology.diplom_weather.presentation.navigation.BottomNavBar
 import ru.netology.diplom_weather.presentation.navigation.Graph
 import ru.netology.diplom_weather.presentation.navigation.TopLevelDestination
-import ru.netology.diplom_weather.ui.theme.DiplomweatherTheme
+import ru.netology.diplom_weather.presentation.ui.theme.DiplomweatherTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

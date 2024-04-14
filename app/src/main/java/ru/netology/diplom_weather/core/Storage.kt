@@ -1,4 +1,4 @@
-package ru.netology.diplom_weather.data.source.local
+package ru.netology.diplom_weather.core
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -15,11 +15,11 @@ abstract class Storage(private val dataStore: DataStore<Preferences>) {
 
     fun <T> createStateFlow(
         preferencesKey: Preferences.Key<T>,
-        defaultValue: T? = null,
-    ): StateFlow<T?> {
+        defaultValue: T,
+    ): StateFlow<T> {
         return dataStore.data
             .map { preferences ->
-                preferences[preferencesKey]
+                preferences[preferencesKey] ?: defaultValue
             }
             .catch { it.printStackTrace() }
             .stateIn(

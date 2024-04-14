@@ -5,7 +5,6 @@ import ru.netology.diplom_weather.data.dto.WeatherDto
 
 interface Repository {
 
-    val weather: Flow<WeatherDto?>
+//    val weather: Flow<WeatherDto?>
 
-    fun getWeatherData()
 }

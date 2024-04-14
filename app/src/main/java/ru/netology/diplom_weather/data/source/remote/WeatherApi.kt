@@ -3,6 +3,7 @@ package ru.netology.diplom_weather.data.source.remote
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
+import ru.netology.diplom_weather.BuildConfig
 import ru.netology.diplom_weather.data.dto.WeatherDto
 
 interface WeatherApi {
