@@ -4,7 +4,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import ru.netology.diplom_weather.presentation.main.MainUiState
 import ru.netology.diplom_weather.presentation.main.MainViewModel
 
 const val homeRoute = "home_route"

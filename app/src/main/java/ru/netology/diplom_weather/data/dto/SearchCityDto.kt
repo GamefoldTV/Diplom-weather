@@ -1,6 +1,8 @@
 package ru.netology.diplom_weather.data.dto
 
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class SearchCityDto(
     val id: Long,
     val name: String,

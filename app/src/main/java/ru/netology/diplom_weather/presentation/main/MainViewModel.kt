@@ -1,5 +1,6 @@
 package ru.netology.diplom_weather.presentation.main
 
+import android.util.Log
 import androidx.compose.runtime.Stable
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,19 +22,23 @@ class MainViewModel(
     private val userStorage: UserStorage,
 ) : BaseViewModel() {
 
-    private val _uiState = MutableStateFlow<MainUiState>(MainUiState.Loading)
-    val uiState = _uiState.asStateFlow()
+    val weatherState = combine(userStorage.city, userStorage.language, ::merge).stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5_000L),
+        WeatherUiState.Loading
+    )
 
-    init {
-        combine(userStorage.city, userStorage.language) { city, language ->
-            viewModelScope.launch {
-                try {
-                    _uiState.value = MainUiState.Success(repository.getWeatherDto(city, language))
-                } catch (e: Exception) {
-                    errorHandler.handleError(e)
-                    MainUiState.Error(e.cause?.let { errorHandler.getUserMessage(it) })
-                }
-            }
+    private suspend fun merge(
+        city: String,
+        language: String
+    ): WeatherUiState {
+        return try {
+            Log.e("AndroidLogger", "Success")
+            WeatherUiState.Success(repository.getWeatherDto(city, language))
+        } catch (e: Exception) {
+            errorHandler.handleError(e)
+            Log.e("AndroidLogger", "Error")
+            WeatherUiState.Error(e.cause?.let { errorHandler.getUserMessage(it) })
         }
     }
 
@@ -51,6 +56,7 @@ class MainViewModel(
         .onEach { _isSearching.emit(true) }
         .combine(_result) { text, result ->
             if (text.isBlank()) {
+                Log.e("Result return", result.toString())
                 result
             } else {
                 try {
@@ -68,20 +74,24 @@ class MainViewModel(
             _result.value
         )
 
-
     fun onSearchTextChange(text: String) {
         _searchText.value = text
     }
 
     private suspend fun getSearchResult(text: String): List<SearchCityDto> {
-           return repository.getSearchCityResult(text)
+        return repository.getSearchCityResult(text)
     }
 
+    fun queryExecute(value: String) {
+        viewModelScope.launch {
+            userStorage.saveCity(value)
+        }
+    }
 }
 
 @Stable
-sealed interface MainUiState {
-    data object Loading : MainUiState
-    data class Error(val message: String?) : MainUiState
-    data class Success(val weatherDto: WeatherDto) : MainUiState
+sealed interface WeatherUiState {
+    data object Loading : WeatherUiState
+    data class Error(val message: String?) : WeatherUiState
+    data class Success(val weatherDto: WeatherDto) : WeatherUiState
 }
