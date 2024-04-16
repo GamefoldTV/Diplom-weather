@@ -11,5 +11,6 @@
     <string name="core_common_action_ok">OK</string>
     <string name="try_change_city">Попробуйте сменить город</string>
     <string name="not_found">Ничего не найдено</string>
+    <string name="search">Поиск</string>
 
 </resources>

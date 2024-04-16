@@ -363,7 +363,7 @@ fun EmbeddedSearchBar(
                 .fillMaxWidth()
                 .animateContentSize(spring(stiffness = Spring.StiffnessHigh))
         },
-        placeholder = { Text("Search") },
+        placeholder = { Text(stringResource(R.string.search)) },
         leadingIcon = {
             if (isSearchActive) {
                 IconButton(
