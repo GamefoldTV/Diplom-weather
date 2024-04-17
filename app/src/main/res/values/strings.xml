@@ -11,4 +11,14 @@
     <string name="try_change_city">Try changing the city</string>
     <string name="not_found">Not Found</string>
     <string name="search">Search</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="moonrise">Moonrise</string>
+    <string name="moonset">Moonset</string>
+    <string name="moon_phase">Moon phase</string>
+    <string name="moon_illumination">Moon illumination</string>
+    <string name="min">"min: "</string>
+    <string name="avg">"avg: "</string>
+    <string name="max">"max: "</string>
+    <string name="sign_in">SIGN IN</string>
 </resources>

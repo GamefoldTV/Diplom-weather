@@ -1,9 +1,5 @@
 package ru.netology.diplom_weather.presentation.home
 
-import android.content.Context
-import android.net.Uri
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.annotation.OptIn
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
@@ -13,14 +9,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,7 +21,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -42,18 +34,14 @@ import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -63,23 +51,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.util.fastFlatMap
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.graphics.drawable.toDrawable
-import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.ui.AspectRatioFrameLayout
-import androidx.media3.ui.PlayerView
 import coil.compose.AsyncImage
 import ru.netology.diplom_weather.R
 import ru.netology.diplom_weather.data.dto.ForecastDto
 import ru.netology.diplom_weather.data.dto.SearchCityDto
 import ru.netology.diplom_weather.data.dto.WeatherDto
-import ru.netology.diplom_weather.presentation.main.WeatherUiState
 import ru.netology.diplom_weather.presentation.main.MainViewModel
-import ru.netology.diplom_weather.presentation.ui.theme.Padding.*
+import ru.netology.diplom_weather.presentation.main.WeatherUiState
+import ru.netology.diplom_weather.presentation.ui.theme.Padding.M
+import ru.netology.diplom_weather.presentation.ui.theme.Padding.S
+import ru.netology.diplom_weather.presentation.ui.theme.Padding.TOP
+import ru.netology.diplom_weather.presentation.ui.theme.Padding.XS
 import ru.netology.diplom_weather.presentation.ui.theme.Shapes
 import java.time.LocalDateTime
 
@@ -109,27 +92,7 @@ private fun HomeUi(
     isSearching: Boolean,
     queryExecute: (String) -> Unit,
 ) {
-
-    val context = LocalContext.current
-
     var isSearchActive by rememberSaveable { mutableStateOf(false) }
-
-
-    val exoPlayer = remember {
-        context.buildExoPlayer(uri = Uri.parse("android.resource://raw/" + R.raw.clouds))
-    }
-
-    DisposableEffect(
-        key1 = exoPlayer
-    ) {
-        onDispose {
-            exoPlayer.release()
-        }
-    }
-    AndroidView(
-        modifier = Modifier.fillMaxSize(),
-        factory = { it.buildPlayerView(exoPlayer) },
-    )
 
     Scaffold(
         containerColor = Color.Transparent,
@@ -303,21 +266,21 @@ private fun WeatherCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 Text(
-                    text = "min: " + weather.forecast.forecastday[0].day.mintemp_c.toString() + "°",
+                    text = stringResource(id = R.string.min) + weather.forecast.forecastday[0].day.mintemp_c.toString() + "°",
                     color = Color.White,
                     fontWeight = FontWeight.Medium,
                     fontSize = 18.sp
                 )
 
                 Text(
-                    text = "avg: " + weather.forecast.forecastday[0].day.avgtemp_c.toString() + "°",
+                    text = stringResource(id = R.string.avg) + weather.forecast.forecastday[0].day.avgtemp_c.toString() + "°",
                     color = Color.White,
                     fontWeight = FontWeight.Medium,
                     fontSize = 18.sp
                 )
 
                 Text(
-                    text = "max: " + weather.forecast.forecastday[0].day.maxtemp_c.toString() + "°",
+                    text = stringResource(id = R.string.max)  + weather.forecast.forecastday[0].day.maxtemp_c.toString() + "°",
                     color = Color.White,
                     fontWeight = FontWeight.Medium,
                     fontSize = 18.sp
@@ -460,26 +423,6 @@ fun EmbeddedSearchBar(
     }
 }
 
-private fun Context.buildExoPlayer(uri: Uri) =
-    ExoPlayer.Builder(this).build().apply {
-        setMediaItem(MediaItem.fromUri(uri))
-        repeatMode = Player.REPEAT_MODE_ALL
-        playWhenReady = true
-        prepare()
-    }
-
-@UnstableApi
-private fun Context.buildPlayerView(exoPlayer: ExoPlayer) =
-    PlayerView(this).apply {
-        foreground = Color.Black.copy(0.3f).toArgb().toDrawable()
-        player = exoPlayer
-        layoutParams = FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        useController = false
-        resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-    }
 
 //@Composable
 //@Preview(showSystemUi = true)

@@ -12,5 +12,15 @@
     <string name="try_change_city">Попробуйте сменить город</string>
     <string name="not_found">Ничего не найдено</string>
     <string name="search">Поиск</string>
+    <string name="sunrise">Восход солнца</string>
+    <string name="sunset">Заход солнца</string>
+    <string name="moonrise">Восход луны</string>
+    <string name="moonset">Заход луны</string>
+    <string name="moon_phase">Фаза луны</string>
+    <string name="moon_illumination">Освещенность луны</string>
+    <string name="min">"мин: "</string>
+    <string name="avg">"сред: "</string>
+    <string name="max">"макс: "</string>
+    <string name="sign_in">SIGN IN</string>
 
 </resources>

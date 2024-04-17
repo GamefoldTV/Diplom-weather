@@ -14,18 +14,19 @@ fun BottomNavBar(
     navController: NavController,
     onNavigateToDestination: (TopLevelDestination) -> Unit,
 ) {
-    destinations.forEach { destination ->
-        val selected = navController.currentBackStackEntryAsState().value?.destination
-            .isTopLevelDestinationInHierarchy(destination)
+    NavigationBar {
 
-        NavigationBar {
+        destinations.forEach { destination ->
+            val selected = navController.currentBackStackEntryAsState().value?.destination
+                .isTopLevelDestinationInHierarchy(destination)
+
             NavigationBarItem(
                 selected = selected,
                 onClick = { onNavigateToDestination(destination) },
                 icon = {
                     Icon(
                         imageVector = destination.image,
-                        contentDescription = stringResource(id = destination.description)
+                        contentDescription = destination.description
                     )
                 }
             )
