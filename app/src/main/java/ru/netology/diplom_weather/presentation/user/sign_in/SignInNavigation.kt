@@ -11,10 +11,16 @@ fun NavController.navigateToSignIn(navOptions: NavOptions? = null) {
     this.navigate(signInRoute, navOptions)
 }
 
-fun NavGraphBuilder.signInScreen() {
+fun NavGraphBuilder.signInScreen(
+    onNavigateToSignUpClick: () -> Unit,
+    onNavigateToProfile: () -> Unit,
+) {
     composable(
         route = signInRoute,
     ) {
-        SignInScreen()
+        SignInScreen(
+            onNavigateToSignUpClick = onNavigateToSignUpClick,
+            onNavigateToProfile = onNavigateToProfile,
+        )
     }
 }

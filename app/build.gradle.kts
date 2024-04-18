@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.ktxSerialConverter)
     implementation(libs.jsoup)
 
+    implementation(libs.androidx.core.splashscreen)
+
     implementation(libs.dataStore)
 
     implementation(libs.compose.coil)

@@ -21,4 +21,6 @@
     <string name="avg">"avg: "</string>
     <string name="max">"max: "</string>
     <string name="sign_in">SIGN IN</string>
+    <string name="do_not_have_account">"Еще нет аккаунта? "</string>
+    <string name="sign_up">Создать</string>
 </resources>

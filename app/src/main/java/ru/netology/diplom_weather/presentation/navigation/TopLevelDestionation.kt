@@ -1,6 +1,7 @@
 package ru.netology.diplom_weather.presentation.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -22,4 +23,9 @@ enum class TopLevelDestination(
         image = Icons.Filled.Star,
         description = Icons.Filled.Star.name,
     ),
+    SHARED(
+        route = Graph.USER,
+        image = Icons.Filled.AccountCircle,
+        description = Icons.Filled.AccountCircle.name,
+    )
 }

@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
+import ru.netology.diplom_weather.App.Companion.appModule
 import ru.netology.diplom_weather.App.Companion.coreModule
 
 
@@ -19,6 +20,9 @@ open class BaseViewModel : ViewModel() {
         }
         CoroutineScope(SupervisorJob() + Dispatchers.Main + errorHandler)
     }
+
+    protected val resources = coreModule.resources
+
     override fun onCleared() {
         super.onCleared()
         viewModelScope.cancel()

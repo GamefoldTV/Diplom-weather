@@ -8,7 +8,6 @@ import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -41,6 +40,8 @@ import ru.netology.diplom_weather.presentation.home.navigateToHome
 import ru.netology.diplom_weather.presentation.navigation.BottomNavBar
 import ru.netology.diplom_weather.presentation.navigation.Graph
 import ru.netology.diplom_weather.presentation.navigation.TopLevelDestination
+import ru.netology.diplom_weather.presentation.user.navigateToShared
+import ru.netology.diplom_weather.presentation.user.sharedScreen
 
 @Composable
 fun MainScreen(
@@ -108,13 +109,16 @@ private fun MainUi(
                         TopLevelDestination.ASTROLOGY -> navController.navigateToAstrology(
                             topLevelOptions
                         )
+
+                        TopLevelDestination.SHARED -> navController.navigateToShared(
+                            topLevelOptions
+                        )
                     }
                 }
             )
         }
     ) {
         Box(modifier = Modifier.padding(it)) {
-
             NavHost(
                 navController = navController,
                 route = Graph.MAIN,
@@ -122,11 +126,11 @@ private fun MainUi(
             ) {
                 homeScreen(viewModel)
                 astrologyScreen(viewModel)
+                sharedScreen()
             }
         }
     }
 }
-
 
 
 private fun Context.buildExoPlayer(uri: Uri) =
