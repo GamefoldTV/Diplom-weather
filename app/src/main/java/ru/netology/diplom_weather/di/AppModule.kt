@@ -32,8 +32,9 @@ interface AppModule {
 fun AppModule(appContext: Context): AppModule {
     return object : AppModule {
 
-        override val firebaseAuth: FirebaseAuth
-            get() = FirebaseAuth.getInstance()
+        override val firebaseAuth: FirebaseAuth by lazy {
+            FirebaseAuth.getInstance()
+        }
 
         override val userStorage: UserStorage by lazy {
             UserStorage(appContext.dataStore)
@@ -46,8 +47,6 @@ fun AppModule(appContext: Context): AppModule {
         override val repository: Repository by lazy {
             RepositoryImpl(weatherApi, userStorage)
         }
-
-
 
     }
 }

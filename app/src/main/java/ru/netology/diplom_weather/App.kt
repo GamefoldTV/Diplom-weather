@@ -8,9 +8,7 @@ import coil.memory.MemoryCache
 import coil.request.CachePolicy
 import coil.util.DebugLogger
 import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
 import okhttp3.OkHttpClient
-import ru.netology.diplom_weather.core.impl.AndroidResources
 import ru.netology.diplom_weather.di.AppModule
 import ru.netology.diplom_weather.di.CoreModule
 
@@ -23,6 +21,7 @@ class App : Application(), ImageLoaderFactory {
 
     override fun onCreate() {
         super.onCreate()
+        FirebaseApp.initializeApp(applicationContext)
         appModule = AppModule(applicationContext)
         coreModule = CoreModule(applicationContext)
     }

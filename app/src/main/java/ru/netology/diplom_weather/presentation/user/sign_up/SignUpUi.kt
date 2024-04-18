@@ -102,7 +102,7 @@ private fun SignUpUi(
                 onSignUpClick()
             },
         ) {
-            Text(stringResource(R.string.sign_in), Modifier.padding(vertical = 8.dp))
+            Text(stringResource(R.string.sign_up), Modifier.padding(vertical = 8.dp))
         }
         HorizontalDivider(
             modifier = Modifier.padding(top = 48.dp),

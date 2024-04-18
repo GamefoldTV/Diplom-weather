@@ -31,12 +31,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.withAnnotation
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -137,10 +139,16 @@ private fun SignInUi(
             color = Color.White.copy(alpha = 0.3f)
         )
         val text = buildAnnotatedString {
-            append(stringResource(R.string.do_not_have_account))
+            withStyle(style = SpanStyle(color = Color.White)) {
+                append(stringResource(R.string.do_not_have_account))
+            }
+
+
             val textTag = stringResource(R.string.sign_up)
             withAnnotation("tag", "annotation") {
-                append(textTag)
+                withStyle(style = SpanStyle(color = Color.Cyan)) {
+                    append(textTag)
+                }
             }
         }
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "271076648819",
+    "project_id": "diplom-weather",
+    "storage_bucket": "diplom-weather.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271076648819:android:8b3349cd6f5be53efd4706",
+        "android_client_info": {
+          "package_name": "ru.netology.diplom_weather"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3g-S3_4O4YB6Tit9Irsls8j4_hctYS8Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
